@@ -6,7 +6,7 @@
 	"scripts": {
 		"build": "rm -rf ./index.js && parcel build src/index.js",
 		"git": "git add --all && git commit -am 'release' && git push",
-		"test": "yarn build && node -r dotenv/config mocha",
+		"test": "yarn build && mocha",
 		"fix": "eslint src --fix",
 		"publish": "yarn fix && yarn build && yarn git && npm publish --access public"
 	},

@@ -11,6 +11,7 @@ const nearAPI = require('near-api-js');
 const getConfig = require(CONFIG_PATH);
 
 import { getType, getTypeSupply, nftContractPath } from './nft';
+import { createAccount, getClientAccount } from './accounts';
 import { validBlock, verifySignature, hasAccessKey, withNear } from './middleware';
 
 const networkId = NETWORK_ID;
@@ -36,6 +37,7 @@ const near = new Near({
 	deps: { keyStore },
 });
 const { connection } = near;
+const contractAccount = new Account(connection, REACT_APP_FUNDING_ACCOUNT)
 
 module.exports = {
 	near,
@@ -48,7 +50,7 @@ module.exports = {
 	validBlock, verifySignature,
 
 	createAccount,
-	viewAccount,
+	viewAccount: contractAccount,
 
 	networkId,
 	fundingAccount: new Account(connection, REACT_APP_FUNDING_ACCOUNT),
@@ -73,7 +75,7 @@ module.exports = {
 	},
 
 	nft: {
-		contractBytes: fs.readFileSync(nftContractPath),
+		// contractBytes: fs.readFileSync(nftContractPath),
 		gas: '50000000000000',
 		attachedDeposit: parseNearAmount('0.02'),
 	},
