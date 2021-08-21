@@ -1,1 +1,3 @@
 # near-server
+
+Unmaintained ATM
